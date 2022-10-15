@@ -10,14 +10,15 @@
     user-select: none;
 }
 .nav{
-    position: absolute;
+    position: fixed;
     width: 99%;
     height: 100px;
     font-family: "Monaco";
     background-color: rgb(0, 0, 0);
+    z-index: 10;
 }
 .name{
-    position: absolute;
+    position: fixed;
     left: 20px;
     color: rgb(255, 255, 255);
     font-size: 30px;
@@ -27,13 +28,43 @@
 }
 
 .resume{
-    position: absolute;
+    position: fixed;
     right: 20px;
     top: 33px;
     color: rgb(255, 255, 255);
     font-size: 15px;
     font-weight: lighter;
     cursor: pointer;
+}
+
+.coding{
+    position: absolute;
+    right:0%;
+    top: 10%;
+    width: 40%;
+    height: 70%;
+    background-color: rgb(0, 0, 0);
+    border: rgb(129, 129, 129) solid;
+}
+
+.terminal{
+    position: absolute;
+    color: rgb(255, 255, 255);
+    bottom: 0%;
+    right: 20px;
+}
+
+.red{
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    color: red;
+}
+.white{
+    position: relative;
+    left: 60px;
+    font-size: 30px;
+    color: white;
 }
 
 @media  (max-width: 1200px) {
@@ -53,12 +84,19 @@
 	left:40px;
 }
 
-h1 {
+.myprof {
     font-size: 72px;
-    font-family:'Titan One',cursive;
+    font-family:'Copperplate';
     background: -webkit-linear-gradient(#eee,rgb(30, 0, 255));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-
+.container-2{
+    position: absolute;
+    top: 100%;
+    width: 99%;
+    height: 100%;
+    background-color: black;
+    z-index: -1;
+}
