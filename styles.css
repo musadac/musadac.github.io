@@ -69,7 +69,7 @@
     color: white;
 }
 
-@media  (max-width: 1200px) {
+@media  (max-width: 600px) {
     .name{
         font-size: 45px;
     }
@@ -80,7 +80,7 @@
     .coding{
         top: 50%;
         width: 80%;
-        height: 25%;
+        height: 30%;
     }
 }
 
