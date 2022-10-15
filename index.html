@@ -13,7 +13,7 @@
         </div>
         <div class="coding">
             <p class="white" id="white" >> print(about_me)</p>
-            <p class="white" id="w2" >> </p>
+            <p class="white" id="w2" >> Inspired, passionate, genuine, and fearless!</p>
             <p class="terminal" id="terminal" >Console: Python 3.0</p>
         </div>
         <div class="container-2">
@@ -23,9 +23,14 @@
 
     <script>
         var i = 0;
+        var j = 0;
         var txt = ['DATA SCIENTIST', 'COMPUTER SCIENTIST', 'RESEARCHER'];
         var speed = 1500;
-        
+        var speed2 = 1000;
+        var txt2 = [ 
+                    'I am focused and place enormous importance and value on strong relationships built on trust, respect, and a good dose of fun and laughter.',
+                    'I have over two years of industry experience in technical fields ranging from data-governance platforms to data-driven platforms. I am skilled in Machine Learning, Deep Learning, Automation, Data Analysis, and NLP. I have a passion for finding solutions to enable new possibilities.'];
+
         function typeWriter() {
             document.getElementById("myprof").innerHTML = "HI, I AM A <br>" + txt[i];
             i++;
@@ -34,6 +39,14 @@
             }
             setTimeout(typeWriter, speed);
         }
+        function aboutWriter() {
+            if(j<txt2.length){
+                document.getElementById("w2").innerHTML += "<br>> " + txt2[j];
+                j++;
+                setTimeout(aboutWriter, speed2);
+            }    
+        }
         typeWriter();
+        setTimeout(aboutWriter, speed2);
     </script>
 </html>
