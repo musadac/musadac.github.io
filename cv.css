@@ -12,12 +12,17 @@
     color: #404040;
 }
 .subtitle_text{
-    padding-top: 20px;
-    padding-bottom: 0px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
     font-family: 'League Gothic', sans-serif;
     font-weight: 700;
+    border-radius: 5px;
     font-size: 36pt;
-    color: #000000;
+    color: #ffff;
+    background-color: #000000;
 }
 
 .emphblack{
