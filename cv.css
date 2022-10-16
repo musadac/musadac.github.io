@@ -1,6 +1,6 @@
 
 .body{
-    background-color: rgb(255, 255, 255);
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(209, 244, 247));
     /* -webkit-touch-callout: none; 
     -webkit-user-select: none; 
     -khtml-user-select: none; 
@@ -32,7 +32,7 @@
 
 .mainbody{
 
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
     width: 800px;
     margin-left: auto;
     margin-right: auto;
