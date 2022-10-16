@@ -1,52 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=League Gothic' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="cv.css">
     <body class= "body">
-        <div class="nav">
-            <p class="name" id="name" >MUSA DILDAR AHMED CHEEMA</p>
-            <a href="musadac_resume.pdf" download="musadac_resume.pdf">
-                <p class="resume" id="resume"  >DOWNLOAD RESUME</p>
-            </a>
-        </div>
-        <div class="container">
-            <h1 class="myprof" id="myprof">HI, I AM DATA SCIENTIST</h1>
-        </div>
-        <div class="coding">
-            <p class="white" id="white" >> print(about_me)</p>
-            <p class="white" id="w2" >> Inspired, passionate, genuine, and fearless!</p>
-            <p class="terminal" id="terminal" >Console: Python 3.0</p>
-        </div>
-        <div class="container-2">
-            
+        <div class= "mainbody">
+            <img style="float:right; border: #404040 1px solid;" src="musadac.jpg" width="394" height="348" alt="musadac">
+            <div class="title_text">
+                <div>MUSA</div>
+                <div>DILDAR AHMED</div>
+                <div>CHEEMA</div>
+            </div>
+            <div class="minor_text" style="padding-top: 10px;">
+                <div>Undergraduate Student of Data Science</div>
+                <div>National University of Computer and Emerging Sciences (FAST)</div>
+                <div class="email">mcheema2001@gmail.com</div>
+                <div class="minor_text">Islamabad, Pakistan</div>
+                <div style="padding-top: 6px;">
+                  <a href="https://github.com/musadac"><i class="fa fa-github" style="font-size:48px;color:black"></i></a>
+                  <a href="https://www.linkedin.com/in/musa-dildar-ahmed-cheema-70108a1a1/"><i class="fa fa-linkedin-square" style="font-size:48px;color:rgb(10, 102, 194)"></i></a>
+                </div>
+            </div>
         </div>
     </body>
-
-    <script>
-        var i = 0;
-        var j = 0;
-        var txt = ['DATA SCIENTIST', 'COMPUTER SCIENTIST', 'RESEARCHER'];
-        var speed = 1500;
-        var speed2 = 1000;
-        var txt2 = [ 
-                    'I am focused and place enormous importance and value on strong relationships built on trust, respect, and a good dose of fun and laughter.',
-                    'I have over two years of industry experience in technical fields ranging from data-governance platforms to data-driven platforms. I am skilled in Machine Learning, Deep Learning, Automation, Data Analysis, and NLP. I have a passion for finding solutions to enable new possibilities.'];
-
-        function typeWriter() {
-            document.getElementById("myprof").innerHTML = "HI, I AM A <br>" + txt[i];
-            i++;
-            if(i>=txt.length){
-                i = 0;
-            }
-            setTimeout(typeWriter, speed);
-        }
-        function aboutWriter() {
-            if(j<txt2.length){
-                document.getElementById("w2").innerHTML += "<br>> " + txt2[j];
-                j++;
-                setTimeout(aboutWriter, speed2);
-            }    
-        }
-        typeWriter();
-        setTimeout(aboutWriter, speed2);
-    </script>
 </html>
