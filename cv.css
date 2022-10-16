@@ -1,12 +1,12 @@
 
 .body{
     background-color: rgb(255, 255, 255);
-    -webkit-touch-callout: none; 
+    /* -webkit-touch-callout: none; 
     -webkit-user-select: none; 
     -khtml-user-select: none; 
     -moz-user-select: none; 
     -ms-user-select: none; 
-    user-select: none;
+    user-select: none; */
     font-family: 'Open Sans', sans-serif;
     font-size: 13pt;
     color: #404040;
@@ -31,3 +31,17 @@
 .email{
     font-weight: 700;
 }
+
+.subtitle_text {
+    padding-top: 20px;
+    padding-bottom: 0px;
+    font-family: 'League Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 36pt;
+    color: #000000;
+    }
+
+    .emphblack {
+        color: #000000;
+        font-weight: 700;
+    }
