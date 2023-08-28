@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
-// const nextConfig = {}
+const nextConfig = {
+output: 'export',
+}
 
-// module.exports = nextConfig
+module.exports = nextConfig
 
 const isGithubActions = process.env.GITHUB_ACTIONS || false
 
@@ -18,4 +20,5 @@ if (isGithubActions) {
 module.exports = {
   assetPrefix: assetPrefix,
   basePath: basePath,
+  output: 'export',
 }
