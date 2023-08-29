@@ -131,18 +131,18 @@ export default function Home() {
             </div>
             
           </div>
-          <div className='min-h-[300px] mb-2  w-full lg:w-[32%] p-2 bg-gradient-to-br from-orange-300  to-red-500 rounded-lg'>
+          <div className='min-h-[300px] mb-2  w-full lg:w-[32%] p-2 bg-gradient-to-br from-rose-400  to-rose-600 rounded-lg'>
             <div className='rounded-full px-2 py-1 mt-6 ml-2 bg-white w-[170px] font-bold text-center'>Career Aspiration</div>
             <p className='font-bold text-white m-4'>
               My career aspiration is to become a visionary leader and innovator in the field of Data Science and Artificial Intelligence.
               I envision myself driving transformative change through the creative and responsible application of cutting-edge technologies to address real-world challenges. 
-              One of my most significant career aspirations is to pursue a Master&apos;s degree from <span className='text-red-700'>Stanford</span> . 
+              One of my most significant career aspirations is to pursue a Master&apos;s degree from <span className='text-black font-bold'>Stanford</span> . 
               Ultimately, my career aspiration is to leave a lasting legacy as someone who not only contributed technically but also inspired and empowered others to reach new heights. 
             </p>
           </div>
           
       </div>
-      <div className='mx-6 mt-6 rounded-lg min-h-[500px]  font-bold p-6 bg-gradient-to-r from-red-200  to-orange-100'>
+      <div className='mx-6 mt-6 rounded-lg min-h-[500px]  font-bold p-6 bg-gradient-to-br from-blue-100  to-white'>
           <p className='text-3xl mb-5 text-black'>Experience</p>
           <div className='border-[#D83764] border-4 p-4 mt-2 rounded-xl text-[#365495]'>
             <p className=''>My Impact Meter</p>
@@ -193,7 +193,7 @@ export default function Home() {
               Python, NLP, Ontology, Neo.Js, ElasticDB, AWS, OpenCL, Bloomfilter, Latex, React, MongoDB, SQL, Github
             </div>
           </div>
-          <div className='border-blue-800 border-4 p-4 mt-2 rounded-xl text-yellow-600'>
+          <div className='border-blue-800 border-4 p-4 mt-2 rounded-xl text-black'>
             <p className=''>NUCES FAST ISB</p>
             <div className='lg:flex justify-between'>
               <p className='text-blue-400 '>&#x2022; Teacher Assistant</p>
@@ -232,8 +232,106 @@ export default function Home() {
           <p className='text-white font-light'>&nbsp;- NASCOM Arrangments</p>
       </div>
 
-      <div className='mt-6 lg:mt-0 min-h-[60vh] bg-white flex items-center justify-center'>
-        <div className='min-h-[50vh] m-6 bg-gradient-to-b from-purple-500  to-black p-6 z-10 rounded-xl'>
+      <div className='min-h-[300px] mx-6 mt-4 mb-10 rounded-lg bg-gradient-to-br from-purple-300  to-white ' style={{zIndex:'100'}}>
+        <p className='text-3xl lg:text-5xl ml-6 text-black font-extrabold pt-10'>Projects</p>
+        <div className='lg:flex mx-6 mb-4 mt-8 justify-between'>
+            <div className='min-h-[250px] lg:w-[32%]  shadow-purple-700 rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
+              <p className='text-black text-3xl font-bold'>ViLanOCR</p>
+              <p className='text-black text-sm font-light mt-2'>
+                MultiLingual OCR Trained on Urdu English, Chinese, Japnese Language. It uses MBART-50 and Swin as Decoder and Encoder. It is trained on over 50M images.
+                It generalizes on Handwritten Urdu really well at 1.2% CER Only.
+              </p>
+              <div className='mt-2 lg:flex'>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> Transformers </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> Vit </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> HuggingFace </div>
+              </div>
+              <div className='mt-2 block lg:flex'>
+                <a href='https://github.com/musadac/ViLanOCR' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Github Code </a>
+                <a href='https://huggingface.co/spaces/musadac/VilanOCR-Urdu-English-Chinese' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Live Demo </a>
+              </div>
+            </div>
+            <div className='min-h-[250px] lg:w-[32%] shadow-xl rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
+              <p className='text-black text-3xl font-bold'>BART/LLama 7b SFT Trainer</p>
+              <p className='text-black text-sm font-light mt-2'>
+                Implementation for training Language Models on a single GPU using PEFT and Trained using Hugging Face SFT Trainer. Dataset used is Instruct. Maximum Model that can be 
+                trained is LLama 7B.
+              </p>
+              <div className='mt-2 lg:flex'>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> LLM </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> PEFT </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> HuggingFace </div>
+              </div>
+              <div className='mt-2 block lg:flex'>
+                <a href='https://github.com/musadac/Training-LLMs' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Github Code </a>
+              </div>
+            </div>
+            <div className='min-h-[250px] lg:w-[32%] shadow-xl  rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
+              <p className='text-black text-3xl font-bold'>LLama2.C</p>
+              <p className='text-black text-sm font-light mt-2'>
+                Made a Chat UI for LLama2 Inference model in C by Andrew Karpathy. Built a socket server in C and used HTML to connect to socket server. This inference the Model
+                on CPU in realtime. LLama can be trained for small tasks.
+              </p>
+              <div className='mt-2 lg:flex'>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> LLama </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> C </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> WebSocket.C </div>
+              </div>
+              <div className='mt-2 block lg:flex'>
+                <a href='https://github.com/musadac/llama2.c' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Github Code </a>
+              </div>
+            </div>
+        </div>
+        <div className='lg:flex mx-6 mb-4 mt-0 justify-between'>
+            <div className='min-h-[250px] lg:w-[32%] shadow-xl  rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
+              <p className='text-black text-3xl font-bold'>Chatbot GPT3</p>
+              <p className='text-black text-sm font-light mt-2'>
+                Chatbot to carry conversation with a client and take information from them in a conversation. Implemented it on Rules and regulation of companies data.
+                Used Vector Database and Prompt Engineering to get good results.
+              </p>
+              <div className='mt-2 lg:flex'>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> Prompt Engg </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> OpenAI </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> PineCone </div>
+              </div>
+             
+            </div>
+            <div className='min-h-[250px] lg:w-[32%] shadow-xl  rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
+              <p className='text-black text-3xl font-bold'>POS System</p>
+              <p className='text-black text-sm font-light mt-2'>
+                Implemented a POS System that can give live stats of sales from anywhere around the world. This project is deployed in shops. Pakistan is place that lacks these types
+                of system this can help track as well as help you detect fraud with intelligent solutions integrated into it.
+              </p>
+              <div className='mt-2 lg:flex'>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> NextJS </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> ExpressJS </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> AWS </div>
+              </div>
+              <div className='mt-2 block lg:flex'>
+                <a href='http://3.128.132.194:3000' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Live Demo </a>
+              </div>
+            </div>
+            <div className='min-h-[250px] lg:w-[32%] shadow-xl  rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
+              <p className='text-black text-3xl font-bold'>DBLP-HADOOP</p>
+              <p className='text-black text-sm font-light mt-2'>
+                An Efficent Method to load an XML of 32GB by using only 30MB of system memory using hadoop Loading it into Hadoop File System. Extends on also integrating
+                MongoDB. 
+              </p>
+              <div className='mt-2 lg:flex'>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> Hadoop </div>
+                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> MongoDB </div>
+              </div>
+              <div className='mt-2 block lg:flex'>
+                <a  href='https://github.com/musadac/DBLP-HADOOP' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Github Code </a>
+              </div>
+            </div>
+        </div>
+        <div className='flex justify-center mt-10 mx-6 pb-10'>
+          <a href='https://github.com/musadac' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white text-lg'> Other Projects on Github &#8680; </a>
+        </div>
+      </div>
+      <div className='mt-6 min-h-[40vh] mb-6 bg-white flex items-center justify-center'>
+        <div className='min-h-[40vh] mx-6 bg-gradient-to-br from-pink-600  to-rose-400 p-6 z-10 rounded-xl'>
           <h1 className='text-5xl text-white font-extrabold'>
             Publications
           </h1>
@@ -272,104 +370,7 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <div className='min-h-screen bg-black w-screen ' style={{zIndex:'100'}}>
-        <p className='text-4xl lg:text-8xl ml-6 text-white font-extrabold pt-10'>Projects</p>
-        <div className='lg:flex mx-6 mb-4 mt-8 justify-between'>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl hover:shadow-red-800 shadow-purple-700 rounded-3xl border-white border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-white text-3xl font-bold'>ViLanOCR</p>
-              <p className='text-white text-sm font-light mt-2'>
-                MultiLingual OCR Trained on Urdu English, Chinese, Japnese Language. It uses MBART-50 and Swin as Decoder and Encoder. It is trained on over 50M images.
-                It generalizes on Handwritten Urdu really well at 1.2% CER Only.
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-purple-400 border-2 text-purple-400 p-2 rounded-lg mr-2 cursor-default hover:bg-purple-400 hover:text-white'> Transformers </div>
-                <div className='mt-2 lg:mt-0 border-yellow-400 border-2 text-yellow-400 p-2 rounded-lg mr-2 cursor-default hover:bg-yellow-400 hover:text-white'> Vit </div>
-                <div className='mt-2 lg:mt-0 border-red-400 border-2 text-red-400 p-2 rounded-lg mr-2 cursor-default hover:bg-red-400 hover:text-white'> HuggingFace </div>
-              </div>
-              <div className='mt-2 block lg:flex'>
-                <a href='https://github.com/musadac/ViLanOCR' className='mt-2 block lg:mt-0 border-white border-2 text-white p-2 rounded-lg mr-2 cursor-pointer hover:bg-white hover:text-black'> Github Code </a>
-                <a href='https://huggingface.co/spaces/musadac/VilanOCR-Urdu-English-Chinese' className='mt-2 block lg:mt-0 border-orange-400 border-2 text-orange-400 p-2 rounded-lg mr-2 cursor-pointer hover:bg-orange-400 hover:text-white'> Live Demo </a>
-              </div>
-            </div>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl hover:shadow-red-800 shadow-purple-700 rounded-3xl border-white border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-white text-3xl font-bold'>BART/LLama 7b SFT Trainer</p>
-              <p className='text-white text-sm font-light mt-2'>
-                Implementation for training Language Models on a single GPU using PEFT and Trained using Hugging Face SFT Trainer. Dataset used is Instruct. Maximum Model that can be 
-                trained is LLama 7B.
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-purple-400 border-2 text-purple-400 p-2 rounded-lg mr-2 cursor-default hover:bg-purple-400 hover:text-white'> LLM </div>
-                <div className='mt-2 lg:mt-0 border-yellow-400 border-2 text-yellow-400 p-2 rounded-lg mr-2 cursor-default hover:bg-yellow-400 hover:text-white'> PEFT </div>
-                <div className='mt-2 lg:mt-0 border-red-400 border-2 text-red-400 p-2 rounded-lg mr-2 cursor-default hover:bg-red-400 hover:text-white'> HuggingFace </div>
-              </div>
-              <div className='mt-2 block lg:flex'>
-                <a href='https://github.com/musadac/Training-LLMs' className='mt-2 block lg:mt-0 border-white border-2 text-white p-2 rounded-lg mr-2 cursor-pointer hover:bg-white hover:text-black'> Github Code </a>
-              </div>
-            </div>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl hover:shadow-red-800 shadow-purple-700 rounded-3xl border-white border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-white text-3xl font-bold'>LLama2.C</p>
-              <p className='text-white text-sm font-light mt-2'>
-                Made a Chat UI for LLama2 Inference model in C by Andrew Karpathy. Built a socket server in C and used HTML to connect to socket server. This inference the Model
-                on CPU in realtime. LLama can be trained for small tasks.
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-purple-400 border-2 text-purple-400 p-2 rounded-lg mr-2 cursor-default hover:bg-purple-400 hover:text-white'> LLama </div>
-                <div className='mt-2 lg:mt-0 border-yellow-400 border-2 text-yellow-400 p-2 rounded-lg mr-2 cursor-default hover:bg-yellow-400 hover:text-white'> C </div>
-                <div className='mt-2 lg:mt-0 border-red-400 border-2 text-red-400 p-2 rounded-lg mr-2 cursor-default hover:bg-red-400 hover:text-white'> WebSocket.C </div>
-              </div>
-              <div className='mt-2 block lg:flex'>
-                <a href='https://github.com/musadac/llama2.c' className='mt-2 block lg:mt-0 border-white border-2 text-white p-2 rounded-lg mr-2 cursor-pointer hover:bg-white hover:text-black'> Github Code </a>
-              </div>
-            </div>
-        </div>
-        <div className='lg:flex mx-6 mb-4 mt-8 justify-between'>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl hover:shadow-red-800 shadow-purple-700 rounded-3xl border-white border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-white text-3xl font-bold'>Chatbot GPT3</p>
-              <p className='text-white text-sm font-light mt-2'>
-                Chatbot to carry conversation with a client and take information from them in a conversation. Implemented it on Rules and regulation of companies data.
-                Used Vector Database and Prompt Engineering to get good results.
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-purple-400 border-2 text-purple-400 p-2 rounded-lg mr-2 cursor-default hover:bg-purple-400 hover:text-white'> Prompt Engg </div>
-                <div className='mt-2 lg:mt-0 border-yellow-400 border-2 text-yellow-400 p-2 rounded-lg mr-2 cursor-default hover:bg-yellow-400 hover:text-white'> OpenAI </div>
-                <div className='mt-2 lg:mt-0 border-red-400 border-2 text-red-400 p-2 rounded-lg mr-2 cursor-default hover:bg-red-400 hover:text-white'> PineCone </div>
-              </div>
-             
-            </div>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl hover:shadow-red-800 shadow-purple-700 rounded-3xl border-white border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-white text-3xl font-bold'>POS System</p>
-              <p className='text-white text-sm font-light mt-2'>
-                Implemented a POS System that can give live stats of sales from anywhere around the world. This project is deployed in shops. Pakistan is place that lacks these types
-                of system this can help track as well as help you detect fraud with intelligent solutions integrated into it.
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-purple-400 border-2 text-purple-400 p-2 rounded-lg mr-2 cursor-default hover:bg-purple-400 hover:text-white'> NextJS </div>
-                <div className='mt-2 lg:mt-0 border-yellow-400 border-2 text-yellow-400 p-2 rounded-lg mr-2 cursor-default hover:bg-yellow-400 hover:text-white'> ExpressJS </div>
-                <div className='mt-2 lg:mt-0 border-red-400 border-2 text-red-400 p-2 rounded-lg mr-2 cursor-default hover:bg-red-400 hover:text-white'> AWS </div>
-              </div>
-              <div className='mt-2 block lg:flex'>
-                <a href='http://3.128.132.194:3000' className='mt-2 block lg:mt-0 border-orange-400 border-2 text-orange-400 p-2 rounded-lg mr-2 cursor-pointer hover:bg-orange-400 hover:text-white'> Live Demo </a>
-              </div>
-            </div>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl hover:shadow-red-800 shadow-purple-700 rounded-3xl border-white border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-white text-3xl font-bold'>DBLP-HADOOP</p>
-              <p className='text-white text-sm font-light mt-2'>
-                An Efficent Method to load an XML of 32GB by using only 30MB of system memory using hadoop Loading it into Hadoop File System. Extends on also integrating
-                MongoDB. 
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-purple-400 border-2 text-purple-400 p-2 rounded-lg mr-2 cursor-default hover:bg-purple-400 hover:text-white'> Hadoop </div>
-                <div className='mt-2 lg:mt-0 border-yellow-400 border-2 text-yellow-400 p-2 rounded-lg mr-2 cursor-default hover:bg-yellow-400 hover:text-white'> MongoDB </div>
-              </div>
-              <div className='mt-2 block lg:flex'>
-                <a  href='https://github.com/musadac/DBLP-HADOOP' className='mt-2 block lg:mt-0 border-white border-2 text-white p-2 rounded-lg mr-2 cursor-pointer hover:bg-white hover:text-black'> Github Code </a>
-              </div>
-            </div>
-        </div>
-        <div className='flex justify-center mt-10 mx-6 pb-6'>
-          <a href='https://github.com/musadac' className='mt-2 block lg:mt-0 border-white border-2 text-white p-2 rounded-lg mr-2 cursor-pointer hover:bg-white hover:text-black text-2xl'> Many Other Projects on Github &#8680; </a>
-        </div>
-      </div>
+      
     </main>
   )
 }
