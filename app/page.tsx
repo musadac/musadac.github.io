@@ -357,6 +357,7 @@ export default function Home() {
              Among these methods, the research area of graphs has not been explored enough in the context of ranking.
             </span>
           </p>
+          
 
           <p className='text-white font-normal mt-3'>
             <span className='text-2xl font-extrabold mr-2'>3.</span>
