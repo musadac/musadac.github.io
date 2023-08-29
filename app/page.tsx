@@ -21,6 +21,8 @@ import pyspark from '../public/pyspark.png'
 import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [cpuCores, setCpuCores] = useState<number | null>(null);
+  const [totalMemory, setTotalMemory] = useState<number | null>(null);
 
   let logos = [
     python,
@@ -44,6 +46,19 @@ export default function Home() {
   const [currentLogos, setCurrentLogos] = useState<any>([]);
   
   useEffect(() => {
+    const cores = window.navigator.hardwareConcurrency;
+    setCpuCores(cores);
+
+    // Get total memory information
+    // @ts-ignore
+    if (window.navigator.deviceMemory) {
+      // @ts-ignore
+      const memory = window.navigator.deviceMemory;
+      setTotalMemory(memory);
+    }
+
+    
+
     setCurrentLogos(logos);
     const interval = setInterval(() => {
       setCurrentLogos((prevLogos:any) => {
@@ -79,7 +94,11 @@ export default function Home() {
               <p className="text-white ml-1">&#x2022; Space Enthusiast</p>
           </div>
         </div>
+        
       </div>
+      <div className='bg-gradient-to-r from-blue-900  to-blue-500'>
+          <p className='ml-6 mb-2 text-xs text-white'>System Cores: {cpuCores}, System Memory: {totalMemory?.toPrecision(1)}GB</p>
+      </div>  
       <div className='carouselContainer border-blue-900 border-b-4'>
         <ul className='carousel'>
           {currentLogos.map((logo:any, index:any) => (
