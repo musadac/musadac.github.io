@@ -93,11 +93,14 @@ export default function Home() {
               <p className="text-white ml-1">&#x2022; AGI </p>
               <p className="text-white ml-1">&#x2022; Space Enthusiast</p>
           </div>
+          <h1 className="text-sm ml-6 mt-4 text-white ">
+            Contact me @ <a href='mailto:mcheema2010@gmail.com' className='underline'>mcheema2010@gmail.com</a>
+          </h1>
         </div>
         
       </div>
       <div className='bg-gradient-to-r from-blue-900  to-blue-500'>
-          <p className='ml-6 mb-2 text-xs text-white'>System Cores: {cpuCores}, System Memory: {totalMemory?.toPrecision(1)}GB</p>
+          <p className='ml-6 text-xs text-white'>System Cores: {cpuCores}, System Memory: {totalMemory?.toPrecision(1)}GB</p>
       </div>  
       <div className='carouselContainer border-blue-900 border-b-4'>
         <ul className='carousel'>
