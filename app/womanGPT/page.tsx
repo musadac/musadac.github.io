@@ -41,7 +41,7 @@ function FemaleGPT() {
       setLoading(true);
 
       // Define the Flask API URL
-      const apiUrl = 'http://3.128.132.194:5055/generate_response'; // Update this URL as needed
+      const apiUrl = 'http://3.132.214.197:5000/generate_response'; // Update this URL as needed
   
       // Define the request data
       const requestData = {
