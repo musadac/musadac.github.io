@@ -7,6 +7,6 @@ module.exports = {
   reactStrictMode: true,
 
  // Add basePath
-  // basePath: '/github-pages',
-  // output: 'export',
+  basePath: '/github-pages',
+  output: 'export',
 }
