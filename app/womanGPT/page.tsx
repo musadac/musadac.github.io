@@ -41,7 +41,7 @@ function FemaleGPT() {
       setLoading(true);
 
       // Define the Flask API URL
-      const apiUrl = 'http://3.132.214.197:5000/generate_response'; // Update this URL as needed
+      const apiUrl = 'http://3.132.214.197:5055/generate_response'; // Update this URL as needed
   
       // Define the request data
       const requestData = {
@@ -65,7 +65,6 @@ function FemaleGPT() {
   
         const data = await response.json();
         setData(data);
-        console.log(data)
       } catch (error) {
         console.error('Error:', error);
       }
@@ -81,7 +80,7 @@ function FemaleGPT() {
             {loading && <LoadingOverlay />}
             <div className='flex h-[150px] w-screen bg-gradient-to-r from-blue-900  to-blue-500 items-center'>
                 <div>
-                    <h1 className="text-2xl lg:text-7xl font-bold ml-6 bg-clip-text bg-gradient-to-b from-white from-50% to-blue-600 text-transparent ">
+                    <h1 className="text-2xl lg:text-7xl font-bold lg:ml-6 ml-4 bg-clip-text bg-gradient-to-b from-white from-50% to-blue-600 text-transparent ">
                         Pakistani Woman GPT
                     </h1>
                     <h1 className="text-xs lg:ml-7  ml-4 mt-2 mr-7 text-white ">
@@ -132,7 +131,7 @@ function FemaleGPT() {
                     </div>
                 </div>
                 </div>
-                :<div className='fixed top-[400px] left-0 w-full h-full flex items-center justify-center   text-blue-200 text-6xl font-extrabold '>PAKISTAN WOMAN GPT</div>}
+                :<div className='fixed top-[400px] left-0 w-full h-full flex lg:items-center justify-center   text-blue-200 lg:text-6xl font-extrabold '>PAKISTAN WOMAN GPT</div>}
         </div>
     );
 }
