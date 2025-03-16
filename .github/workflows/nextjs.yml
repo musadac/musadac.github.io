@@ -69,6 +69,10 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+      
+      - name: Debug Build Output
+        run: ls -R ./out || echo "No output directory found!"
+
 
   deploy:
     environment:
