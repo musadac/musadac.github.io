@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-output: 'export',
-}
-
-module.exports = {
   reactStrictMode: true,
+  basePath: process.env.NODE_ENV === "production" ? "/github-pages" : "", // Set basePath only in production
+  assetPrefix: process.env.NODE_ENV === "production" ? "/github-pages/" : "", // Ensure assets load correctly
+  trailingSlash: true, // Needed for GitHub Pages
+  output: "export",
+};
 
- // Add basePath
-  basePath: '/github-pages',
-  output: 'export',
-}
+module.exports = nextConfig;
