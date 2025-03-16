@@ -1,400 +1,482 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import python from '../public/python.png'
-import cplus from '../public/cplus.png'
-import pytorch from '../public/pytorch.png'
-import openai from '../public/openai.png'
-import aws from '../public/aws.png'
-import azure from '../public/azure.png'
-import hf from '../public/hf.png'
-import git from '../public/git.png'
-import docker from '../public/docker.png'
-import kub from '../public/kub.png'
-import mongo from '../public/mongo.png'
-import jen from '../public/jen.png'
-import flask from '../public/flask.png'
-import hadoop from '../public/hadoop.png'
-import kafka from '../public/kafka.png'
-import pyspark from '../public/pyspark.png'
+import Image from 'next/image';
+import { useEffect } from 'react';
+import profilePic from '../public/profile.jpg';
 
-import { useState, useEffect } from 'react';
+// JSON data for Experience
+const experienceData = [
+  {
+    title: "AVIRSO",
+    role: "Tech Business Management Consultant",
+    dates: "03/2025 – Present",
+    details: [
+      "Providing tech business management consulting as a personal venture.",
+      "Working on strategic initiatives for a Fortune 10 company."
+    ],
+    tools: "Business Strategy, Technology Consulting, Project Management",
+    color: "#FBBF24" // Amber-400
+  },
+  {
+    title: "Teradata",
+    role: "Professional Data Scientist",
+    dates: "01/2025 – 04/2025",
+    details: [
+      "Worked on AI ASK SQL Model training and SQL generation.",
+      "Developed Agentic inDB Workflow Generation.",
+      "Benchmarked Teradata VectorStore and generated inDB ONNX Embeddings.",
+      "Implemented inDB Intent Classification and Multi-Entity Tagging."
+    ],
+    tools: "Teradata, SQLMR, C++, Python, Cloud Platforms",
+    color: "#EF4444" // Red-500
+  },
+  {
+    title: "Teradata",
+    role: "Graduate Associate Data Science",
+    dates: "01/2024 – Present",
+    details: [
+      "Outstanding performance on the Wells Fargo project led to double promotion.",
+      "Developed a SQLMR function to tokenize input text into meaningful n-grams, enhancing sentiment analysis, topic identification, and document classification.",
+      "Engineered a function for precise text tagging and improved NLP outcomes.",
+      "Developed TD_GenAI functions for advanced text analytics within Teradata.",
+      "Implemented an in-database BYO-LLM solution and a system to convert unstructured data into JSON.",
+      "Initiated projects for in-database training (BYOM-LLM) and a parallel Torch NN-like library for ANN/CNN inference.",
+      "Worked on a Document QA system and defect detection (Wafer in DB) using ML and extensive feature engineering."
+    ],
+    tools:
+      "C, C++, Java, Regex; vLLM, C++, Python, Huggingface, Teradata Vantage, AWS, VCL, BYOM, PyTorch, ML, UDFs",
+    color: "#2563EB" // Blue-600
+  },
+  {
+    title: "My Impact Meter",
+    role: "Data Scientist (Part-time)",
+    dates: "02/2022 – 09/2023",
+    details: [
+      "Developed data visualization dashboards for the admin portal to bolster data-driven decision-making.",
+      "Created an automated data pipeline for the Payment & Services division, reducing manual processing time by 80%."
+    ],
+    tools: "Dashboarding Tools, Data Pipeline Automation",
+    color: "#0EA5E9" // Sky-500
+  },
+  {
+    title: "Data Insight Lab",
+    role: "Research Assistant",
+    dates: "06/2022 – 06/2023",
+    details: [
+      "Developed ViLanOCR – a state-of-the-art method for extracting handwritten bilingual text from medical prescriptions.",
+      "Addressed challenges in extracting handwritten Urdu by leveraging advanced ML techniques."
+    ],
+    tools: "Python, Machine Learning, OCR, Deep Learning",
+    color: "#10B981" // Emerald-500
+  },
+  {
+    title: "Knowledge Discovery & Data Science Lab",
+    role: "Research Assistant (Part-time)",
+    dates: "03/2021 – 08/2022",
+    details: [
+      "Contributed to a NCAI-funded project to re-design e-recruitment using AI for temporal analysis.",
+      "Developed a novel resume ranking algorithm and optimized real-time entity enrichment from resumes."
+    ],
+    tools: "AI, Machine Learning, Graph Databases, Optimization",
+    color: "#8B5CF6" // Violet-500
+  }
+];
+
+// JSON data for Education
+const educationData = [
+  {
+    title: "NUCES FAST ISB",
+    degree: "BS Data Science",
+    dates: "Aug 2019 - Jun 2023",
+    details:
+      "Coursework: AI, NLP, Big Data, Distributed Data Engineering, DevOps/MLOps, and more.",
+    color: "#2563EB" // Blue-600
+  },
+  {
+    title: "Stanford University",
+    degree: "Summer School",
+    dates: "Jun 2022 - Aug 2022",
+    details: "Courses: CS229 Machine Learning, SOC-128D Social Data Science, etc.",
+    color: "#10B981" // Emerald-500
+  }
+];
+
+// JSON data for Publications
+const publicationData = [
+  {
+    title:
+      "An efficient algorithm for ranking candidates in e-recruitment system",
+    authors:
+      "Abdul Hanan Minhas, Mohammad Daniyal Shaiq, Saad Ali Qureshi, Musa Cheema, Shujaat Hussain, Kifayat Ullah Khan",
+    link: "https://ieeexplore.ieee.org/abstract/document/9721629/",
+    description:
+      "A comprehensive approach that enhances candidate ranking in e-recruitment through advanced algorithms and graph-based techniques.",
+    color: "#2563EB" // Blue-600
+  },
+  {
+    title:
+      "Feature-Wise Ranking of Candidates through Maximum Degrees in Hidden Bipartite Graphs",
+    authors:
+      "Sarah Kiyani, Musa Cheema, Saad Ali Qureshi, Shujaat Hussain, Kifayat Ullah Khan",
+    link: "https://ieeexplore.ieee.org/abstract/document/9721803/",
+    description:
+      "Innovative graph-based techniques to improve candidate ranking accuracy in recruitment systems.",
+    color: "#1D4ED8" // Blue-700
+  },
+  {
+    title:
+      "Transformer based Urdu Handwritten Text Optical Character Reader",
+    authors:
+      "Mohammad Daniyal Shaiq, Musa Dildar Ahmed Cheema, Ali Kamal",
+    link: "https://arxiv.org/abs/2206.04575",
+    description:
+      "A pioneering OCR approach for handwritten Urdu text leveraging transformer architectures.",
+    color: "#8B5CF6" // Violet-500
+  },
+  {
+    title:
+      "Adapting multilingual vision language transformers for low-resource Urdu optical character recognition (OCR)",
+    authors:
+      "Musa Dildar Ahmed Cheema, Mohammad Daniyal Shaiq, Farhaan Mirza, Ali Kamal, M. Asif Naeem​",
+    link: "https://peerj.com/articles/cs-1964/",
+    description:
+      "This research introduces ViLanOCR—an innovative bilingual OCR system tailored for Urdu and English. Leveraging advanced multilingual transformer-based models, the approach achieves state-of-the-art performance on the Urdu UHWR dataset with a CER of 1.1%, surpassing existing baselines.",
+    color: "#FBBF24" // Amber-400
+  }
+];
+
+const judgeshipData = [
+  {
+    title: "EME Final Year Project Showcase 2024",
+    color: "#EF4444" // Teal-500
+  },
+  {
+    title: "NASCON 2024 Data Quest",
+    color: "#FACC15"
+  },
+  {
+    title: "NASCON 2024 Code Craft",
+    color: "#3B82F6"
+  },
+  {
+    title: "NASCON 2023 Code Craft",
+    color: "#14B8A6"
+  }
+];
+
+const awardsData = [
+  { title: "Teradata Quaterly Award Q3", color: "#F59E0B" }, // Amber-400
+  { title: "Teradata Project Team Award Q3", color: "#EF4444" }, // Red-500
+  { title: "Teradata Quaterly Award Q2", color: "#FACC15" }, // Yellow-400
+  { title: "Teradata Spot Award Jul 2024", color: "#10B981" }, // Emerald-500
+  { title: "Teradata Spot Award Apr 2024", color: "#3B82F6" }, // Blue-500
+  { title: "Teradata Spot Award Dec 2023", color: "#8B5CF6" }, // Violet-500
+  { title: "Zindagi Awards Best FYP 2023", color: "#14B8A6" }, // Teal-500
+  { title: "Bronze Award", color: "#B08D57" }, // Bronze
+  { title: "Dean's List x3", color: "#6B7280" } // Gray
+];
 
 export default function Home() {
-  const [cpuCores, setCpuCores] = useState<number | null>(null);
-  const [totalMemory, setTotalMemory] = useState<number | null>(null);
-
-  let logos = [
-    python,
-    cplus,
-    pytorch,
-    openai,
-    aws,
-    azure,
-    hf,
-    git,
-    docker,
-    kub,
-    mongo,
-    jen,
-    flask,
-    hadoop,
-    kafka,
-    pyspark
-  ];
-
-  const [currentLogos, setCurrentLogos] = useState<any>([]);
-  
   useEffect(() => {
-    fetch('https://camo.githubusercontent.com/0aa1caddced311c7fbb984f279b9dc332cc36f8a54911d5c2886fa5528ce7e1a/68747470733a2f2f6b6f6d617265762e636f6d2f67687076632f3f757365726e616d653d6d757361646163266c6162656c3d50726f66696c65253230766965777326636f6c6f723d306537356236267374796c653d666c6174');
-    const cores = window.navigator.hardwareConcurrency;
-    setCpuCores(cores);
-
-    // Get total memory information
-    // @ts-ignore
-    if (window.navigator.deviceMemory) {
-      // @ts-ignore
-      const memory = window.navigator.deviceMemory;
-      setTotalMemory(memory);
-    }
-
-    
-
-    setCurrentLogos(logos);
-    const interval = setInterval(() => {
-      setCurrentLogos((prevLogos:any) => {
-        const [firstLogo, ...restLogos] = prevLogos;
-        return [...restLogos, firstLogo];
-      });
-    }, 2000); // Move every 1 second
-
-    return () => {
-      clearInterval(interval);
-    };
+    // No additional side-effects required
   }, []);
 
-
   return (
-    <main className="min-h-screen bg-white ">
-      <div className="flex z-50 fixed w-screen bg-white h-[75px] items-center border-blue-900 border-b-4 justify-between">
-        <p className="text-2xl font-bold text-blue-900 ml-6 tracking-tight" >Musa Dildar Ahmed Cheema</p>
-        <a href='https://www.linkedin.com/in/musadac/' className='mt-2 lg:mt-0 border-blue-400 border-2 text-blue-400 p-2 rounded-lg mr-2 cursor-pointer hover:bg-blue-400 hover:text-white'> LinkedIn </a>
-      </div>
-      <div className="flex h-[500px] w-screen bg-gradient-to-r from-blue-900  to-blue-500 items-center">
-        <div>
-          <h1 className="text-2xl lg:text-7xl font-bold ml-6 bg-clip-text bg-gradient-to-b from-white from-50% to-blue-600 text-transparent ">
-            Data Scientist
-          </h1>
-          <div className="ml-6  border-white border-b-4"></div>
-          <div className="lg:flex mt-2 ml-7">
-              <p className="text-white">&nbsp;&#x2022; AI/ML </p>
-              <p className="text-white ml-1">&#x2022; DevOps/MLOps  </p>
-              <p className="text-white ml-1">&#x2022; NLP  </p>
-              <p className="text-white ml-1">&#x2022; LLMs  </p>
-              <p className="text-white ml-1">&#x2022; AGI </p>
-              <p className="text-white ml-1">&#x2022; Space Enthusiast</p>
-          </div>
-          <h1 className="text-sm ml-6 mt-4 text-white ">
-            Contact me @ <a href='mailto:mcheema2010@gmail.com' className='underline'>mcheema2010@gmail.com</a>
-          </h1>
-        </div>
-        
-      </div>
-      <div className='bg-gradient-to-r from-blue-900  to-blue-500'>
-          <p className='ml-6 text-xs text-white'>System Cores: {cpuCores}, System Memory: {totalMemory?.toPrecision(1)}GB</p>
-      </div>  
-      <div className='carouselContainer border-blue-900 border-b-4'>
-        <ul className='carousel'>
-          {currentLogos.map((logo:any, index:any) => (
-            <li
-              key={index}
-              className={`carouselItem`}
+    <main className="min-h-screen bg-gray-50 text-gray-800">
+      {/* Header with Gradient and Animation */}
+      <header className="fixed top-0 w-full z-50 bg-gradient-to-r from-blue-900 to-indigo-600 shadow-md animate-fadeInDown">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-white">Musa Dildar Ahmed Cheema</h1>
+          <nav>
+            <a
+              href="https://www.linkedin.com/in/musadac/"
+              className="px-4 py-2 border rounded-md text-white hover:bg-white hover:text-gray-800 transition transform hover:scale-105 duration-300"
             >
+              LinkedIn
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <style jsx>{`
+        @keyframes fadeInDown {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeInDown {
+          animation: fadeInDown 0.6s ease-out;
+        }
+      `}</style>
+
+      {/* Hero Section with Full-Width Gradient */}
+      <section className="py-24 bg-gradient-to-r from-blue-900 to-indigo-600">
+        <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center">
+          <div className="lg:w-1/2 text-left">
+            <h2 className="text-5xl font-bold text-white">Professional Data Scientist</h2>
+            <p className="mt-4 text-xl text-white">
+            I am a highly accomplished data science professional with a proven track record of delivering innovative, impactful solutions. I lead cutting-edge AI/ML projects and have earned recognition as a distinguished judge at premier competitions.
+            </p>
+            <p className="mt-4 text-lg text-white">
+              <span className="font-semibold">Career Aspiration:</span> To spearhead transformative initiatives that redefine the future of Data Science and Artificial Intelligence.
+            </p>
+            <p className="mt-4 text-lg text-white">
+              <span className="font-semibold">Contact:</span>{" "}
+              <a href="mailto:mcheema2010@gmail.com" className="underline text-white">
+                mcheema2010@gmail.com
+              </a>
+            </p>
+          </div>
+          <div className="lg:w-1/2 mt-10 lg:mt-0 flex justify-center">
+            <div className="relative h-96 w-96 rounded-full overflow-hidden border-8 border-white shadow-2xl">
               <Image
-                src={logo}
-                alt={'logo '+ index}
-                className='logoImage w-[125px] object-fit h-[65px] p-2'
+                src={profilePic}
+                alt="Profile Picture"
+                layout="fill"
+                objectFit="cover"
               />
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className='lg:flex mt-6 justify-between mx-6 '>
-          <div className='min-h-[300px] w-full p-2 mb-2 lg:w-[32%] bg-gradient-to-br from-blue-900  to-blue-500 rounded-lg'>
-            <div className='rounded-full px-2 py-1 mt-4 ml-2 bg-white w-[150px] font-bold text-center'>Who I am ?</div>
-            <p className='font-bold text-white m-4'>
-              I am Musa Dildar Ahmed Cheema, a passionate and versatile individual with a strong foundation in Data Science.
-              My journey has been guided by a thirst for knowledge and a drive to make a meaningful impact through technology. 
-              I believe that technology has the potential to transform lives, industries, and societies, and I&apos;ve dedicated myself
-              to harnessing this potential for the betterment of our world.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section className="py-12">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-12 text-left">Experience</h2>
+          <div className="space-y-12">
+            {experienceData.map((item, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-lg border-l-4"
+                style={{ borderLeftColor: item.color }}
+              >
+                <div className="flex justify-between items-center">
+                  <h3 className="text-2xl font-semibold text-left" style={{ color: item.color }}>
+                    {item.title}
+                  </h3>
+                  <span className="text-sm text-gray-500">{item.dates}</span>
+                </div>
+                <p className="mt-2 text-lg font-medium text-gray-600 text-left">{item.role}</p>
+                <ul className="list-disc list-inside mt-4 text-gray-700 text-left">
+                  {item.details.map((detail, idx) => (
+                    <li key={idx}>{detail}</li>
+                  ))}
+                </ul>
+                <div
+                  className="mt-4 rounded p-2 text-sm text-left"
+                  style={{ backgroundColor: item.color, color: "#ffffff" }}
+                >
+                  Tools: {item.tools}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section className="py-12 bg-gray-100">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-12 text-left">Education</h2>
+          <div className="space-y-12">
+            {educationData.map((edu, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-lg border-l-4"
+                style={{ borderLeftColor: edu.color }}
+              >
+                <div className="flex justify-between items-center">
+                  <h3 className="text-2xl font-semibold text-left" style={{ color: edu.color }}>
+                    {edu.title}
+                  </h3>
+                  <span className="text-sm text-gray-500">{edu.dates}</span>
+                </div>
+                <p className="mt-2 text-lg font-medium text-gray-600 text-left">{edu.degree}</p>
+                <p className="mt-4 text-gray-700 text-left">{edu.details}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Publications Section */}
+      <section className="py-12 bg-gray-100">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-12 text-left">Publications</h2>
+          <div className="space-y-12">
+            {publicationData.map((pub, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-lg border-l-4"
+                style={{ borderLeftColor: pub.color }}
+              >
+                <div className="flex justify-between items-center">
+                  <h3 className="text-2xl font-semibold text-left" style={{ color: pub.color }}>
+                    {pub.title}
+                  </h3>
+                </div>
+                <p className="mt-2 text-gray-600 font-medium text-left">{pub.authors}</p>
+                <p className="mt-4 text-gray-700 text-left">{pub.description}</p>
+                <a
+                  href={pub.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block text-blue-600 underline text-left"
+                >
+                  Read More
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Judgeship Section */}
+      <section className="py-12 bg-gray-100">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-left">Judgeship</h2>
+          <div className="space-y-12">
+            {judgeshipData.map((judge, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-lg border-l-4"
+                style={{ borderLeftColor: judge.color }}
+              >
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg text-left" style={{ color: judge.color }}>
+                    {judge.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Awards Section */}
+      <section className="py-12 bg-gray-100">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-12 text-left">Awards</h2>
+          <div className="space-y-8">
+            {awardsData.map((award, index) => (
+              <div
+                key={index}
+                className="bg-white p-4 rounded-lg shadow-lg border-l-4"
+                style={{ borderLeftColor: award.color }}
+              >
+                <p className="text-lg text-left" style={{ color: award.color }}>
+                  {award.title}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Volunteer & Leadership Section */}
+      <section className="py-12 bg-gray-100">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-8 text-left">Volunteer & Leadership</h2>
+          <div className="bg-white shadow rounded-lg p-6 text-left">
+            <p className="text-lg text-gray-700">
+              Google Student Club Vice Head App Dev 2020, NASCOM Arrangements, and other leadership roles.
             </p>
           </div>
-          <div className='min-h-[300px] mb-2 w-full p-2 lg:w-[32%] bg-gradient-to-br from-red-500  to-purple-500 rounded-lg'>
-            <div className='rounded-full px-2 py-1 mt-6 ml-2 bg-white w-[150px] font-bold text-center'>My Education</div>
-            <div className='rounded px-2 py-1 mt-3 mx-3 bg-white  font-bold'>
-              <div className='lg:flex justify-between'>
-                <p>NUCES FAST ISB</p>
-                <p className='text-gray-500 text-sm'>Aug 2019 - June, 23</p>
-              </div>
-              <p className='text-gray-500 text-sm'>Bs Data Science</p>
-              <p className='text-gray-500 text-sm'>
-                <span className='text-black'>Coursework:</span> AI, NLP, Big Data, Distributed Data Engg, DevOps, MLOps, Data Mining, Data Analysis & Visualization, Operating System, 
-                Computer Networks, Algorithms
-              </p>
-            </div>
-            <div className='rounded px-2 py-1 mt-3 mx-3 mb-4 bg-white  font-bold'>
-              <div className='lg:flex justify-between'>
-                <p>Stanford University</p>
-                <p className='text-gray-500 text-sm'>June 2022 - Aug 22</p>
-              </div>
-              <p className='text-gray-500 text-sm'>Stanford Summer School, California</p>
-              <p className='text-gray-500 text-sm'>
-                <span className='text-black'>Coursework:</span> CS229 Machine Learning, SOC-128D Mining Culture Through Text Data: Introduction to Social Data Science
-              </p>
-            </div>
-            
-          </div>
-          <div className='min-h-[300px] mb-2  w-full lg:w-[32%] p-2 bg-gradient-to-br from-rose-400  to-rose-600 rounded-lg'>
-            <div className='rounded-full px-2 py-1 mt-6 ml-2 bg-white w-[170px] font-bold text-center'>Career Aspiration</div>
-            <p className='font-bold text-white m-4'>
-              My career aspiration is to become a visionary leader and innovator in the field of Data Science and Artificial Intelligence.
-              I envision myself driving transformative change through the creative and responsible application of cutting-edge technologies to address real-world challenges. 
-              One of my most significant career aspirations is to pursue a Master&apos;s degree from <span className='text-black font-bold'>Stanford</span> . 
-              Ultimately, my career aspiration is to leave a lasting legacy as someone who not only contributed technically but also inspired and empowered others to reach new heights. 
-            </p>
-          </div>
-          
-      </div>
-      <div className='mx-6 mt-6 rounded-lg min-h-[500px]  font-bold p-6 bg-gradient-to-br from-blue-100  to-white'>
-          <p className='text-3xl mb-5 text-black'>Experience</p>
-          <div className='border-[#D83764] border-4 p-4 mt-2 rounded-xl text-[#365495]'>
-            <p className=''>My Impact Meter</p>
-            <div className='lg:flex justify-between'>
-              <p className='text-[#D83764] '>&#x2022; Data Scientist</p>
-              <p className='text-[#D83764] '>Feb, 2022 - Current </p>
-            </div>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Developed data visualization dashboards for informed decision-making.</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Automated the Payment & Services data pipeline, reducing manual processing by 80% and enhancing efficiency.</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Developed Live LeaderBoard that show Live impact created by Impactors.</p>
-            <div className='lg:flex justify-between'>
-              <p className='text-[#D83764] '>&#x2022; Developer</p>
-              <p className='text-[#D83764] '>Aug, 2020 - Feb, 2022 </p>
-            </div>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Utilized advanced tools to create a secure, scalable MVP using Flutter.</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Demonstrated the potential of our product concept.</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Collabrated with companies CEO, COO, and CFO.</p>
-            <div className='bg-[#D83764] font-normal text-sm min-h-[30px] b-0 -ml-4 -mr-4 -mb-4 flex items-center p-2 text-white mt-3'>
-              Python, Flask, Pytorch, Transformers, Node.JS, Flutter, Next.JS, React.JS, Plotly, Scikit-Learn, Matplotlib, Socket.io, MongoDB, SQL, PowerBI, AWS, Docker
-            </div>
-          </div>
-          <div className='border-blue-400 border-4 p-4 mt-2 rounded-xl text-green-900'>
-            <p className=''>Data Insight Lab</p>
-            <div className='lg:flex justify-between'>
-              <p className='text-blue-400 '>&#x2022; Research Assistant</p>
-              <p className='text-blue-400'>Aug 2022 - June 2023 </p>
-            </div>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Engaged in an R&D-based Final Year Project focusing on &#34;A solution to extract entities from unstructured handwritten bilingual medical prescriptions.&#34;</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Pioneered the development of a state-of-the-art (SOTA) method named ViLanOCR, specialized in extracting handwritten text from bilingual Medical Prescriptions (Urdu and English).</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Successfully resolved the longstanding challenge of extracting handwritten Urdu text, contributing to enhanced accuracy and efficiency in medical data processing.</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Working on Publishing in Q1 Journal.</p>
-            <div className='bg-blue-400 font-normal text-sm min-h-[30px] b-0 -ml-4 -mr-4 -mb-4 flex items-center p-2 text-white mt-3'>
-              Pytorch, Python, MongoDB, Socket.io, Transformers, Tensorflow, LLMs, YOLO, React, Flutter, LabelImg, Latex, MatplotLib, Docker, Kubernetes, DVC, AWS, Hugging Face, Github Actions, Wikipedia
-            </div>
-          
-          </div>
-          <div className='border-purple-800 border-4 p-4 mt-2 rounded-xl text-pink-900'>
-            <p className=''>Knoweledge Data & Discovery Lab</p>
-            <div className='lg:flex justify-between'>
-              <p className='text-purple-800 '>&#x2022; Research Assistant</p>
-              <p className='text-purple-800'>Mar 2021 - Aug 2022 </p>
-            </div>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Contributed to a funded project by the National Center for Artificial Intelligence (NCAI), titled &#34;Re-Designing E-recruitment using AI for Temporal Analysis.&#34;</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Designed and developed a novel resume ranking algorithm for a recommender system.</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Assisted in optimizing disk I/O for real-time entity enrichment from resumes in a graph database (ontology).</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Worked with two PhD Professors and 5 Master Students and Succesfully published 2 Research Papers.</p>
-            <div className='bg-purple-800 font-normal text-sm min-h-[30px] b-0 -ml-4 -mr-4 -mb-4 flex items-center p-2 text-white mt-3'>
-              Python, NLP, Ontology, Neo.Js, ElasticDB, AWS, OpenCL, Bloomfilter, Latex, React, MongoDB, SQL, Github
-            </div>
-          </div>
-          <div className='border-blue-800 border-4 p-4 mt-2 rounded-xl text-black'>
-            <p className=''>NUCES FAST ISB</p>
-            <div className='lg:flex justify-between'>
-              <p className='text-blue-400 '>&#x2022; Teacher Assistant</p>
-              <p className='text-blue-400'>Jan 2023 - June 2023 </p>
-            </div>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Big Data and Analytics and Database Systems.</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Taught 130 Students combined. </p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Pioneered an interactive teaching strategy, focusing on project-based learning to cultivate practical skills. </p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Facilitated hands-on learning, preparing students for real-world challenges in data management and analytics. </p>
-            <div className='lg:flex justify-between'>
-              <p className='text-blue-400 '>&#x2022; Teacher Assistant</p>
-              <p className='text-blue-400'>Aug 2022 - Dec 2022 </p>
-            </div>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Programming Fundamentals (PF).</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Taught 300 Students. </p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Designed a comprehensive assignments focusing on the fundamental concepts of C++ programming. </p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Guided students through real-world coding challenges, enhancing problem-solving and algorithmic thinking skills. </p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Provided personalized feedback and assistance to ensure a strong grasp of core programming principles. </p>
-            <div className='lg:flex justify-between'>
-              <p className='text-blue-400 '>&#x2022; Teacher Assistant</p>
-              <p className='text-blue-400'>Jan 2022 - June 2022 </p>
-            </div>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Big Data and Analytics (BDA).</p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Taught 50 Students. </p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Crafted diverse assignments involving scalable data pipelines with Hadoop and Spark, and optimized database schema design. </p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- Developed a comprehensive project that leveraged Kafka for mobile sensor data acquisition, orchestrating the entire pipeline from data ingestion to machine learning-driven analysis. </p>
-            <p className='text-black font-light'>&nbsp;&nbsp;- The initiative not only exposed students to real-time data handling but also provided insights into machine learning integration for informed decision-making. </p>
-            <div className='bg-blue-800 font-normal text-sm min-h-[30px] b-0 -ml-4 -mr-4 -mb-4 flex items-center p-2 text-white mt-3'>
-                Python, SQL, MongoDB, Hive, Hadoop, PySpark, Cassandra, Kafka, Pub Sub, AWS, Flask, io.Socket, Big Data Algorithms
-            </div>
-          </div>
-      </div>
-      <div className='mx-6 mt-6 rounded-lg min-h-[130px]  font-bold p-6 bg-gradient-to-br from-pink-500  to-purple-900'>
-          <p className='text-4xl mb-2 text-white'>Volunteer Work</p>
-          <p className='text-white font-light'>&nbsp;- Google Student Club Vice Head App Dev 2020</p>
-          <p className='text-white font-light'>&nbsp;- NASCOM Arrangments</p>
-      </div>
+        </div>
+      </section>
 
-      <div className='min-h-[300px] mx-6 mt-4 mb-10 rounded-lg bg-gradient-to-br from-purple-300  to-white ' style={{zIndex:'100'}}>
-        <p className='text-3xl lg:text-5xl ml-6 text-black font-extrabold pt-10'>Projects</p>
-        <div className='lg:flex mx-6 mb-4 mt-8 justify-between'>
-            <div className='min-h-[250px] lg:w-[32%]  shadow-purple-700 rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-black text-3xl font-bold'>ViLanOCR</p>
-              <p className='text-black text-sm font-light mt-2'>
-                MultiLingual OCR Trained on Urdu English, Chinese, Japnese Language. It uses MBART-50 and Swin as Decoder and Encoder. It is trained on over 50M images.
-                It generalizes on Handwritten Urdu really well at 1.2% CER Only.
+      {/* Projects Section */}
+      <section className="py-12">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-8 text-left">Projects</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="bg-white shadow rounded-lg p-6 text-left">
+              <h3 className="text-2xl font-semibold mb-2">ViLanOCR</h3>
+              <p className="text-gray-700 mb-4">
+                A multilingual OCR system for handwritten text achieving a 1.2% CER on handwritten Urdu.
               </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> Transformers </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> Vit </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> HuggingFace </div>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">Transformers</span>
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">ViT</span>
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">HuggingFace</span>
               </div>
-              <div className='mt-2 block lg:flex'>
-                <a href='https://github.com/musadac/ViLanOCR' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Github Code </a>
-                <a href='https://huggingface.co/spaces/musadac/VilanOCR-Urdu-English-Chinese' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Live Demo </a>
+              <div className="flex gap-4">
+                <a
+                  href="https://github.com/musadac/ViLanOCR"
+                  className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-sm"
+                >
+                  Github Code
+                </a>
+                <a
+                  href="https://huggingface.co/spaces/musadac/VilanOCR-Urdu-English-Chinese"
+                  className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-sm"
+                >
+                  Live Demo
+                </a>
               </div>
             </div>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-black text-3xl font-bold'>BART/LLama 7b SFT Trainer</p>
-              <p className='text-black text-sm font-light mt-2'>
-                Implementation for training Language Models on a single GPU using PEFT and Trained using Hugging Face SFT Trainer. Dataset used is Instruct. Maximum Model that can be 
-                trained is LLama 7B.
+            <div className="bg-white shadow rounded-lg p-6 text-left">
+              <h3 className="text-2xl font-semibold mb-2">BART/LLama 7B SFT Trainer</h3>
+              <p className="text-gray-700 mb-4">
+                A trainer implementation for LLMs on a single GPU using PEFT and Hugging Face’s SFT Trainer.
               </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> LLM </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> PEFT </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> HuggingFace </div>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">LLM</span>
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">PEFT</span>
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">HuggingFace</span>
               </div>
-              <div className='mt-2 block lg:flex'>
-                <a href='https://github.com/musadac/Training-LLMs' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Github Code </a>
+              <div>
+                <a
+                  href="https://github.com/musadac/Training-LLMs"
+                  className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-sm"
+                >
+                  Github Code
+                </a>
               </div>
             </div>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl  rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-black text-3xl font-bold'>LLama2.C</p>
-              <p className='text-black text-sm font-light mt-2'>
-                Made a Chat UI for LLama2 Inference model in C by Andrew Karpathy. Built a socket server in C and used HTML to connect to socket server. This inference the Model
-                on CPU in realtime. LLama can be trained for small tasks.
+            <div className="bg-white shadow rounded-lg p-6 text-left">
+              <h3 className="text-2xl font-semibold mb-2">LLama2.C</h3>
+              <p className="text-gray-700 mb-4">
+                Chat UI and socket server for LLama2 inference in C, enabling real-time CPU-based processing.
               </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> LLama </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> C </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> WebSocket.C </div>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">LLama</span>
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">C</span>
+                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">WebSocket</span>
               </div>
-              <div className='mt-2 block lg:flex'>
-                <a href='https://github.com/musadac/llama2.c' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Github Code </a>
+              <div>
+                <a
+                  href="https://github.com/musadac/llama2.c"
+                  className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-sm"
+                >
+                  Github Code
+                </a>
               </div>
             </div>
+          </div>
+          <div className="flex justify-start mt-10">
+            <a
+              href="https://github.com/musadac"
+              className="px-6 py-3 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-lg"
+            >
+              Other Projects on Github &rarr;
+            </a>
+          </div>
         </div>
-        <div className='lg:flex mx-6 mb-4 mt-0 justify-between'>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl  rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-black text-3xl font-bold'>Chatbot GPT3</p>
-              <p className='text-black text-sm font-light mt-2'>
-                Chatbot to carry conversation with a client and take information from them in a conversation. Implemented it on Rules and regulation of companies data.
-                Used Vector Database and Prompt Engineering to get good results.
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> Prompt Engg </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> OpenAI </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> PineCone </div>
-              </div>
-             
-            </div>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl  rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-black text-3xl font-bold'>POS System</p>
-              <p className='text-black text-sm font-light mt-2'>
-                Implemented a POS System that can give live stats of sales from anywhere around the world. This project is deployed in shops. Pakistan is place that lacks these types
-                of system this can help track as well as help you detect fraud with intelligent solutions integrated into it.
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> NextJS </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> ExpressJS </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> AWS </div>
-              </div>
-              <div className='mt-2 block lg:flex'>
-                <a href='http://3.128.132.194:3000' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Live Demo </a>
-              </div>
-            </div>
-            <div className='min-h-[250px] lg:w-[32%] shadow-xl  rounded-3xl border-black border-2 p-8 mb-10 lg:mb-2'>
-              <p className='text-black text-3xl font-bold'>DBLP-HADOOP</p>
-              <p className='text-black text-sm font-light mt-2'>
-                An Efficent Method to load an XML of 32GB by using only 30MB of system memory using hadoop Loading it into Hadoop File System. Extends on also integrating
-                MongoDB. 
-              </p>
-              <div className='mt-2 lg:flex'>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> Hadoop </div>
-                <div className='mt-2 lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-default hover:bg-black hover:text-white'> MongoDB </div>
-              </div>
-              <div className='mt-2 block lg:flex'>
-                <a  href='https://github.com/musadac/DBLP-HADOOP' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white'> Github Code </a>
-              </div>
-            </div>
-        </div>
-        <div className='flex justify-center mt-10 mx-6 pb-10'>
-          <a href='https://github.com/musadac' className='mt-2 block lg:mt-0 border-black border-2 text-black p-2 rounded-lg mr-2 cursor-pointer hover:bg-black hover:text-white text-lg'> Other Projects on Github &#8680; </a>
-        </div>
-      </div>
-      <div className='mt-6 min-h-[40vh] mb-6 bg-white flex items-center justify-center'>
-        <div className='min-h-[40vh] mx-6 bg-gradient-to-br from-pink-600  to-rose-400 p-6 z-10 rounded-xl'>
-          <h1 className='text-5xl text-white font-extrabold'>
-            Publications
-          </h1>
-          <p className='text-white font-normal mt-3'>
-            <span className='text-2xl font-extrabold mr-2'>1.</span>
-            <a href="https://ieeexplore.ieee.org/abstract/document/9721629/" className='font-bold text-xl underline'>An efficient algorithm for ranking candidates in e-recruitment system</a>
-            <br/><span className='text-xs text-gray-200 '>Abdul Hanan Minhas, Mohammad Daniyal Shaiq, Saad Ali Qureshi, Musa Dildar Ahmed Cheema, Shujaat Hussain, Kifayat Ullah Khan</span> 
-            <br/>
-            <span className='text-sm text-white'>
-            Over the last decade, the growth of e-recruitment has resulted in the expansion of web channels dedicated to candidate recruitment, making it easy to find and apply for jobs. 
-            However, as a result, today’s human resource managers are inundated with applications for each job opening. This leads to the production of significant number of documents, referred to as resumes or curriculum vitae (CV).
-            </span>
-          </p>
+      </section>
 
-          <p className='text-white font-normal mt-3'>
-            <span className='text-2xl font-extrabold mr-2'>2.</span>
-            <a href="https://ieeexplore.ieee.org/abstract/document/9721803/" className='font-bold text-xl underline'>Feature-Wise Ranking of Candidates through Maximum Degrees in Hidden Bipartite Graphs</a>
-            <br/><span className='text-xs text-gray-200 '>Sarah Kiyani, Musa Dildar Ahmed Cheema, Saad Ali Qureshi, Shujaat Hussain, Kifayat Ullah Khan</span> 
-            <br/>
-            <span className='text-sm text-white'>
-            In this day and age of technological breakthroughs, electronic recruitment tools have gained much recognition due to their increasing popularity among recruiters.
-             Many methods like Learning To Rank and Multi-Criteria Decision making have been employed inside these tools to enhance the process. The ranking is one of the most important parts of e-recruitment on which these methods and techniques are applied.
-             Among these methods, the research area of graphs has not been explored enough in the context of ranking.
-            </span>
-          </p>
-          
-
-          <p className='text-white font-normal mt-3'>
-            <span className='text-2xl font-extrabold mr-2'>3.</span>
-            <a href="https://arxiv.org/abs/2206.04575" className='font-bold text-xl underline'>Transformer based Urdu Handwritten Text Optical Character Reader</a>
-            <br/><span className='text-xs text-gray-200 '>Sarah Kiyani, Musa Dildar Ahmed Cheema, Saad Ali Qureshi, Shujaat Hussain, Kifayat Ullah Khan</span> 
-            <br/>
-            <span className='text-sm text-white'>
-            Extracting Handwritten text is one of the most important components of digitizing information and making it available for large scale setting.
-             Handwriting Optical Character Reader (OCR) is a research problem in computer vision and natural language processing computing, and a lot of work has been done for English, but unfortunately, very little work has been done for low resourced languages such as Urdu.
-            </span>
-          </p>
+      {/* Footer */}
+      <footer className="bg-white py-6 shadow-inner">
+        <div className="container mx-auto px-6 text-left text-gray-600">
+          &copy; {new Date().getFullYear()} Musa Dildar Ahmed Cheema. All rights reserved.
         </div>
-      </div>
-      
+      </footer>
     </main>
-  )
+  );
 }
