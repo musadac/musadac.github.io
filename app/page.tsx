@@ -147,20 +147,30 @@ const publicationData = [
 
 const judgeshipData = [
   {
-    title: "EME Final Year Project Showcase 2024",
+    title: "COMPPEC NUST EME 2024",
     color: "#EF4444" // Teal-500
   },
   {
-    title: "NASCON 2024 Data Quest",
+    title: "Data Viz NASCON 2024",
     color: "#FACC15"
   },
   {
-    title: "NASCON 2024 Code Craft",
+    title: "Code Craft NASCON 2024",
     color: "#3B82F6"
   },
   {
-    title: "NASCON 2023 Code Craft",
+    title: "Code Craft NASCON 2023",
     color: "#14B8A6"
+  },
+  {
+    title: "Data Quest NASCON 2023",
+    color: "#B08D57"
+  }
+];
+
+const talksData = [
+  {
+    title:"",
   }
 ];
 
@@ -337,22 +347,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Judgeship Section */}
       <section className="py-12 bg-gray-100">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold mb-12 text-left">Judgeship</h2>
-          <div className="space-y-12">
+          <div className="space-y-8">
             {judgeshipData.map((judge, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-lg shadow-lg border-l-4"
+                className="bg-white p-4 rounded-lg shadow-lg border-l-4"
                 style={{ borderLeftColor: judge.color }}
               >
-                <div className="flex justify-between items-center">
-                  <h3 className="text-lg text-left" style={{ color: judge.color }}>
-                    {judge.title}
-                  </h3>
-                </div>
+                <p className="text-lg text-left" style={{ color: judge.color }}>
+                  {judge.title}
+                </p>
               </div>
             ))}
           </div>
