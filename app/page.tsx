@@ -33,7 +33,7 @@ const experienceData = [
   {
     title: "Teradata",
     role: "Graduate Associate Data Science",
-    dates: "01/2024 – Present",
+    dates: "01/2024 – 12/2024",
     details: [
       "Outstanding performance on the Wells Fargo project led to double promotion.",
       "Developed a SQLMR function to tokenize input text into meaningful n-grams, enhancing sentiment analysis, topic identification, and document classification.",
