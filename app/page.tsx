@@ -1,487 +1,320 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import profilePic from '../public/profile.jpg';
 
-// JSON data for Experience
+// ─── Data ────────────────────────────────────────────────────────────────────
+
 const experienceData = [
   {
-    title: "AVIRSO",
-    role: "Tech Business Management Consultant",
-    dates: "03/2025 – Present",
-    details: [
-      "Providing tech business management consulting as a personal venture.",
-      "Working on strategic initiatives for a Fortune 10 company."
-    ],
-    tools: "Business Strategy, Technology Consulting, Project Management",
-    color: "#FBBF24" // Amber-400
+    company: "Avirso",
+    role: "AI Leadership & Tech Management",
+    dates: "2025 – Present",
+    description:
+      "Leading technology strategy and delivery for Fortune 100 enterprises - from automating manual workflows to fundamentally re-imagining business processes with AI. Working directly with CxOs to identify high-impact opportunities and deliver custom-built AI solutions faster than any competitor in market.",
+    tags: ["Enterprise AI", "LLM Deployment", "Process Automation", "Strategy"],
   },
   {
-    title: "Teradata",
-    role: "Professional Data Scientist",
-    dates: "01/2025 – 04/2025",
-    details: [
-      "Worked on AI ASK SQL Model training and SQL generation.",
-      "Developed Agentic inDB Workflow Generation.",
-      "Benchmarked Teradata VectorStore and generated inDB ONNX Embeddings.",
-      "Implemented inDB Intent Classification and Multi-Entity Tagging."
-    ],
-    tools: "Teradata, SQLMR, C++, Python, Cloud Platforms",
-    color: "#EF4444" // Red-500
+    company: "Teradata",
+    role: "Data Science Engineer II",
+    dates: "Jan 2025 – Apr 2025",
+    description:
+      "Trained the AI ASK SQL model and built an agentic in-database workflow engine, enabling natural language interaction with Teradata. Benchmarked VectorStore performance, generated in-database ONNX embeddings, and shipped intent classification and multi-entity tagging pipelines - bringing NLP capabilities natively into the Teradata ecosystem.",
+    tags: ["Agentic AI", "NLP", "ONNX", "In-DB ML"],
   },
   {
-    title: "Teradata",
-    role: "Graduate Associate Data Science",
-    dates: "01/2024 – 12/2024",
-    details: [
-      "Outstanding performance on the Wells Fargo project led to double promotion.",
-      "Developed a SQLMR function to tokenize input text into meaningful n-grams, enhancing sentiment analysis, topic identification, and document classification.",
-      "Engineered a function for precise text tagging and improved NLP outcomes.",
-      "Developed TD_GenAI functions for advanced text analytics within Teradata.",
-      "Implemented an in-database BYO-LLM solution and a system to convert unstructured data into JSON.",
-      "Initiated projects for in-database training (BYOM-LLM) and a parallel Torch NN-like library for ANN/CNN inference.",
-      "Worked on a Document QA system and defect detection (Wafer in DB) using ML and extensive feature engineering."
-    ],
-    tools:
-      "C, C++, Java, Regex; vLLM, C++, Python, Huggingface, Teradata Vantage, AWS, VCL, BYOM, PyTorch, ML, UDFs",
-    color: "#2563EB" // Blue-600
+    company: "Teradata",
+    role: "Data Science Associate I",
+    dates: "Dec 2023 – Jan 2025",
+    description:
+      "Architected TDNN, an in-database deep learning inference library modeled on PyTorch nn, allowing enterprise customers to run predictions at scale without data movement. Built a production RAG pipeline for LLM-powered question answering within Teradata and achieved state-of-the-art accuracy on wafer defect detection, outperforming existing DL/ML baselines.",
+    tags: ["Deep Learning", "RAG Pipelines", "PyTorch", "C++"],
   },
   {
-    title: "My Impact Meter",
-    role: "Data Scientist (Part-time)",
-    dates: "02/2022 – 09/2023",
-    details: [
-      "Developed data visualization dashboards for the admin portal to bolster data-driven decision-making.",
-      "Created an automated data pipeline for the Payment & Services division, reducing manual processing time by 80%."
-    ],
-    tools: "Dashboarding Tools, Data Pipeline Automation",
-    color: "#0EA5E9" // Sky-500
+    company: "Teradata",
+    role: "Graduate Associate",
+    dates: "Sep 2023 – Dec 2023",
+    description:
+      "Earned Spot Award for A Grade in the LEAP program and recognized as Salutatorian. Designed and implemented a full data warehouse pipeline, demonstrating production-readiness from day one.",
+    tags: ["Data Warehousing", "Python", "Teradata Vantage"],
   },
-  {
-    title: "Data Insight Lab",
-    role: "Research Assistant",
-    dates: "06/2022 – 06/2023",
-    details: [
-      "Developed ViLanOCR – a state-of-the-art method for extracting handwritten bilingual text from medical prescriptions.",
-      "Addressed challenges in extracting handwritten Urdu by leveraging advanced ML techniques."
-    ],
-    tools: "Python, Machine Learning, OCR, Deep Learning",
-    color: "#10B981" // Emerald-500
-  },
-  {
-    title: "Knowledge Discovery & Data Science Lab",
-    role: "Research Assistant (Part-time)",
-    dates: "03/2021 – 08/2022",
-    details: [
-      "Contributed to a NCAI-funded project to re-design e-recruitment using AI for temporal analysis.",
-      "Developed a novel resume ranking algorithm and optimized real-time entity enrichment from resumes."
-    ],
-    tools: "AI, Machine Learning, Graph Databases, Optimization",
-    color: "#8B5CF6" // Violet-500
-  }
 ];
 
-// JSON data for Education
-const educationData = [
-  {
-    title: "NUCES FAST ISB",
-    degree: "BS Data Science",
-    dates: "Aug 2019 - Jun 2023",
-    details:
-      "Coursework: AI, NLP, Big Data, Distributed Data Engineering, DevOps/MLOps, and more.",
-    color: "#2563EB" // Blue-600
-  },
-  {
-    title: "Stanford University",
-    degree: "Summer School",
-    dates: "Jun 2022 - Aug 2022",
-    details: "Courses: CS229 Machine Learning, SOC-128D Social Data Science, etc.",
-    color: "#10B981" // Emerald-500
-  }
-];
-
-// JSON data for Publications
 const publicationData = [
   {
-    title:
-      "An efficient algorithm for ranking candidates in e-recruitment system",
-    authors:
-      "Abdul Hanan Minhas, Mohammad Daniyal Shaiq, Saad Ali Qureshi, Musa Cheema, Shujaat Hussain, Kifayat Ullah Khan",
-    link: "https://ieeexplore.ieee.org/abstract/document/9721629/",
-    description:
-      "A comprehensive approach that enhances candidate ranking in e-recruitment through advanced algorithms and graph-based techniques.",
-    color: "#2563EB" // Blue-600
-  },
-  {
-    title:
-      "Feature-Wise Ranking of Candidates through Maximum Degrees in Hidden Bipartite Graphs",
-    authors:
-      "Sarah Kiyani, Musa Cheema, Saad Ali Qureshi, Shujaat Hussain, Kifayat Ullah Khan",
-    link: "https://ieeexplore.ieee.org/abstract/document/9721803/",
-    description:
-      "Innovative graph-based techniques to improve candidate ranking accuracy in recruitment systems.",
-    color: "#1D4ED8" // Blue-700
-  },
-  {
-    title:
-      "Transformer based Urdu Handwritten Text Optical Character Reader",
-    authors:
-      "Mohammad Daniyal Shaiq, Musa Dildar Ahmed Cheema, Ali Kamal",
-    link: "https://arxiv.org/abs/2206.04575",
-    description:
-      "A pioneering OCR approach for handwritten Urdu text leveraging transformer architectures.",
-    color: "#8B5CF6" // Violet-500
-  },
-  {
-    title:
-      "Adapting multilingual vision language transformers for low-resource Urdu optical character recognition (OCR)",
-    authors:
-      "Musa Dildar Ahmed Cheema, Mohammad Daniyal Shaiq, Farhaan Mirza, Ali Kamal, M. Asif Naeem​",
+    title: "Adapting multilingual vision language transformers for low-resource Urdu OCR",
+    venue: "PeerJ Computer Science, 2024",
     link: "https://peerj.com/articles/cs-1964/",
-    description:
-      "This research introduces ViLanOCR—an innovative bilingual OCR system tailored for Urdu and English. Leveraging advanced multilingual transformer-based models, the approach achieves state-of-the-art performance on the Urdu UHWR dataset with a CER of 1.1%, surpassing existing baselines.",
-    color: "#FBBF24" // Amber-400
-  }
+  },
+  {
+    title: "Feature-Wise Ranking of Candidates through Maximum Degrees in Hidden Bipartite Graphs",
+    venue: "IEEE IMCOM 2022",
+    link: "https://ieeexplore.ieee.org/abstract/document/9721803/",
+  },
+  {
+    title: "An Efficient Algorithm for Ranking Candidates in E-Recruitment System",
+    venue: "IEEE IMCOM 2022",
+    link: "https://ieeexplore.ieee.org/abstract/document/9721629/",
+  },
+  {
+    title: "Transformer based Urdu Handwritten Text Optical Character Reader",
+    venue: "arXiv, 2022",
+    link: "https://arxiv.org/abs/2206.04575",
+  },
 ];
 
-const judgeshipData = [
-  {
-    title: "COMPPEC NUST EME 2024",
-    color: "#EF4444" // Teal-500
-  },
-  {
-    title: "Data Viz NASCON 2024",
-    color: "#FACC15"
-  },
-  {
-    title: "Code Craft NASCON 2024",
-    color: "#3B82F6"
-  },
-  {
-    title: "Code Craft NASCON 2023",
-    color: "#14B8A6"
-  },
-  {
-    title: "Data Quest NASCON 2023",
-    color: "#B08D57"
-  }
-];
+// ─── Fade-in hook ────────────────────────────────────────────────────────────
 
-const talksData = [
-  {
-    title:"",
-  }
-];
+function useFadeIn() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-const awardsData = [
-  { title: "Teradata Quaterly Award Q3", color: "#F59E0B" }, // Amber-400
-  { title: "Teradata Project Team Award Q3", color: "#EF4444" }, // Red-500
-  { title: "Teradata Quaterly Award Q2", color: "#FACC15" }, // Yellow-400
-  { title: "Teradata Spot Award Jul 2024", color: "#10B981" }, // Emerald-500
-  { title: "Teradata Spot Award Apr 2024", color: "#3B82F6" }, // Blue-500
-  { title: "Teradata Spot Award Dec 2023", color: "#8B5CF6" }, // Violet-500
-  { title: "Zindagi Awards Best FYP 2023", color: "#14B8A6" }, // Teal-500
-  { title: "Bronze Award", color: "#B08D57" }, // Bronze
-  { title: "Dean's List x3", color: "#6B7280" } // Gray
-];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
+function FadeIn({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, isVisible } = useFadeIn();
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
+
   useEffect(() => {
-    // No additional side-effects required
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-800">
-      {/* Header with Gradient and Animation */}
-      <header className="fixed top-0 w-full z-50 bg-gradient-to-r from-blue-900 to-indigo-600 shadow-md animate-fadeInDown">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-white">Musa Dildar Ahmed Cheema</h1>
-          <nav>
+    <main className="min-h-screen bg-[#0a0a14] text-gray-100 selection:bg-purple-500/30">
+
+      {/* ── Navbar ─────────────────────────────────────────────────────── */}
+      <nav
+        className="fixed top-0 w-full z-50 transition-all duration-300"
+        style={{
+          backgroundColor: scrollY > 50 ? 'rgba(10, 10, 20, 0.95)' : 'transparent',
+          backdropFilter: scrollY > 50 ? 'blur(12px)' : 'none',
+          borderBottom: scrollY > 50 ? '1px solid rgba(139, 92, 246, 0.1)' : '1px solid transparent',
+        }}
+      >
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <span className="text-lg font-semibold text-white tracking-tight">
+            Musa<span className="text-purple-400">.</span>
+          </span>
+          <div className="flex items-center gap-6">
+            <a href="#experience" className="text-sm text-gray-400 hover:text-purple-400 transition">Experience</a>
+            <a href="#publications" className="text-sm text-gray-400 hover:text-purple-400 transition">Publications</a>
+            <a href="/field-notes" className="text-sm text-gray-400 hover:text-purple-400 transition">Field Notes</a>
             <a
               href="https://www.linkedin.com/in/musadac/"
-              className="px-4 py-2 border rounded-md text-white hover:bg-white hover:text-gray-800 transition transform hover:scale-105 duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm px-4 py-2 rounded-lg border border-purple-500/30 text-purple-400 hover:bg-purple-500/10 transition"
             >
               LinkedIn
             </a>
-          </nav>
-        </div>
-      </header>
-
-      <style jsx>{`
-        @keyframes fadeInDown {
-          0% {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadeInDown {
-          animation: fadeInDown 0.6s ease-out;
-        }
-      `}</style>
-
-      {/* Hero Section with Full-Width Gradient */}
-      <section className="py-24 bg-gradient-to-r from-blue-900 to-indigo-600">
-        <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center">
-          <div className="lg:w-1/2 text-left">
-            <h2 className="text-5xl font-bold text-white">Professional Data Scientist</h2>
-            <p className="mt-4 text-xl text-white">
-            I am a highly accomplished data science professional with a proven track record of delivering innovative, impactful solutions. I lead cutting-edge AI/ML projects and have earned recognition as a distinguished judge at premier competitions.
-            </p>
-            <p className="mt-4 text-lg text-white">
-              <span className="font-semibold">Career Aspiration:</span> To spearhead transformative initiatives that redefine the future of Data Science and Artificial Intelligence.
-            </p>
-            <p className="mt-4 text-lg text-white">
-              <span className="font-semibold">Contact:</span>{" "}
-              <a href="mailto:mcheema2010@gmail.com" className="underline text-white">
-                mcheema2010@gmail.com
-              </a>
-            </p>
           </div>
-          <div className="lg:w-1/2 mt-10 lg:mt-0 flex justify-center">
-            <div className="relative h-96 w-96 rounded-full overflow-hidden border-8 border-white shadow-2xl">
-              <Image
-                src={profilePic}
-                alt="Profile Picture"
-                layout="fill"
-                objectFit="cover"
-              />
+        </div>
+      </nav>
+
+      {/* ── Hero ───────────────────────────────────────────────────────── */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-purple-600/10 blur-[120px]" />
+          <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-purple-800/8 blur-[100px]" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px)',
+              backgroundSize: '60px 60px',
+            }}
+          />
+        </div>
+
+        <div className="relative max-w-6xl mx-auto px-6 py-32 flex flex-col lg:flex-row items-center gap-16">
+          <div className="lg:w-3/5">
+            <div className="inline-block px-4 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-400 text-sm mb-6">
+              AI Leadership & Tech Management
+            </div>
+            <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
+              Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">AI Systems</span> That Ship
+            </h1>
+            <p className="mt-6 text-lg text-gray-400 leading-relaxed max-w-2xl">
+              I help Fortune 100 enterprises turn complex, manual processes into production-grade AI systems.
+              Working directly with CxOs to re-imagine how businesses operate - delivering faster than anyone else in market.
+            </p>
+            <p className="mt-4 text-gray-500">
+              Published researcher. Former Teradata. Stanford CS.
+            </p>
+            <div className="mt-8 flex gap-4">
+              <a
+                href="mailto:musa@avirso.ai"
+                className="px-6 py-3 rounded-lg bg-purple-600 text-white font-medium hover:bg-purple-500 transition"
+              >
+                Get in touch
+              </a>
+              <a
+                href="https://www.linkedin.com/in/musadac/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-lg border border-gray-700 text-gray-300 hover:border-purple-500/50 hover:text-purple-400 transition"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+          <div className="lg:w-2/5 flex justify-center">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500/20 to-transparent blur-2xl scale-110" />
+              <div className="relative h-80 w-80 rounded-full overflow-hidden border-2 border-purple-500/20 shadow-2xl shadow-purple-500/10">
+                <Image
+                  src={profilePic}
+                  alt="Musa Dildar Ahmed"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          <span className="text-xs text-gray-600 tracking-widest uppercase">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-purple-500/50 to-transparent" />
+        </div>
       </section>
 
-      {/* Experience Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-left">Experience</h2>
+      {/* ── Experience ─────────────────────────────────────────────────── */}
+      <section id="experience" className="py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <h2 className="text-sm font-medium text-purple-400 tracking-widest uppercase mb-2">Experience</h2>
+            <p className="text-3xl font-bold text-white mb-16">Where I&apos;ve Made an Impact</p>
+          </FadeIn>
+
           <div className="space-y-12">
-            {experienceData.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-lg border-l-4"
-                style={{ borderLeftColor: item.color }}
-              >
-                <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-semibold text-left" style={{ color: item.color }}>
-                    {item.title}
-                  </h3>
-                  <span className="text-sm text-gray-500">{item.dates}</span>
+            {experienceData.map((item, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="group relative p-8 rounded-2xl border border-gray-800/50 bg-gray-900/30 hover:border-purple-500/30 hover:bg-gray-900/50 transition-all duration-300">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+                    <div>
+                      <h3 className="text-xl font-semibold text-white group-hover:text-purple-400 transition">{item.company}</h3>
+                      <p className="text-gray-400">{item.role}</p>
+                    </div>
+                    <span className="text-sm text-gray-600 whitespace-nowrap">{item.dates}</span>
+                  </div>
+                  <p className="text-gray-400 leading-relaxed mb-6">{item.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {item.tags.map((tag, j) => (
+                      <span
+                        key={j}
+                        className="px-3 py-1 rounded-full text-xs text-purple-300 bg-purple-500/10 border border-purple-500/10"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <p className="mt-2 text-lg font-medium text-gray-600 text-left">{item.role}</p>
-                <ul className="list-disc list-inside mt-4 text-gray-700 text-left">
-                  {item.details.map((detail, idx) => (
-                    <li key={idx}>{detail}</li>
-                  ))}
-                </ul>
-                <div
-                  className="mt-4 rounded p-2 text-sm text-left"
-                  style={{ backgroundColor: item.color, color: "#ffffff" }}
-                >
-                  Tools: {item.tools}
-                </div>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Education Section */}
-      <section className="py-12 bg-gray-100">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-left">Education</h2>
-          <div className="space-y-12">
-            {educationData.map((edu, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-lg border-l-4"
-                style={{ borderLeftColor: edu.color }}
-              >
-                <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-semibold text-left" style={{ color: edu.color }}>
-                    {edu.title}
-                  </h3>
-                  <span className="text-sm text-gray-500">{edu.dates}</span>
-                </div>
-                <p className="mt-2 text-lg font-medium text-gray-600 text-left">{edu.degree}</p>
-                <p className="mt-4 text-gray-700 text-left">{edu.details}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── Publications ───────────────────────────────────────────────── */}
+      <section id="publications" className="py-24 border-t border-gray-800/50">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeIn>
+            <h2 className="text-sm font-medium text-purple-400 tracking-widest uppercase mb-2">Research</h2>
+            <p className="text-3xl font-bold text-white mb-16">Publications</p>
+          </FadeIn>
 
-      {/* Publications Section */}
-      <section className="py-12 bg-gray-100">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-left">Publications</h2>
-          <div className="space-y-12">
-            {publicationData.map((pub, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-lg border-l-4"
-                style={{ borderLeftColor: pub.color }}
-              >
-                <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-semibold text-left" style={{ color: pub.color }}>
-                    {pub.title}
-                  </h3>
-                </div>
-                <p className="mt-2 text-gray-600 font-medium text-left">{pub.authors}</p>
-                <p className="mt-4 text-gray-700 text-left">{pub.description}</p>
+          <div className="space-y-6">
+            {publicationData.map((pub, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
                 <a
                   href={pub.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-block text-blue-600 underline text-left"
+                  className="group block p-6 rounded-xl border border-gray-800/50 bg-gray-900/20 hover:border-purple-500/30 hover:bg-gray-900/40 transition-all duration-300"
                 >
-                  Read More
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-lg font-medium text-white group-hover:text-purple-400 transition leading-snug">
+                        {pub.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-gray-500">{pub.venue}</p>
+                    </div>
+                    <span className="text-gray-600 group-hover:text-purple-400 transition flex-shrink-0 mt-1">
+                      ↗
+                    </span>
+                  </div>
                 </a>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-12 bg-gray-100">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-left">Judgeship</h2>
-          <div className="space-y-8">
-            {judgeshipData.map((judge, index) => (
-              <div
-                key={index}
-                className="bg-white p-4 rounded-lg shadow-lg border-l-4"
-                style={{ borderLeftColor: judge.color }}
-              >
-                <p className="text-lg text-left" style={{ color: judge.color }}>
-                  {judge.title}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Awards Section */}
-      <section className="py-12 bg-gray-100">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-left">Awards</h2>
-          <div className="space-y-8">
-            {awardsData.map((award, index) => (
-              <div
-                key={index}
-                className="bg-white p-4 rounded-lg shadow-lg border-l-4"
-                style={{ borderLeftColor: award.color }}
-              >
-                <p className="text-lg text-left" style={{ color: award.color }}>
-                  {award.title}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Volunteer & Leadership Section */}
-      <section className="py-12 bg-gray-100">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-8 text-left">Volunteer & Leadership</h2>
-          <div className="bg-white shadow rounded-lg p-6 text-left">
-            <p className="text-lg text-gray-700">
-              Google Student Club Vice Head App Dev 2020, NASCOM Arrangements, and other leadership roles.
+      {/* ── Contact ────────────────────────────────────────────────────── */}
+      <section className="py-24 border-t border-gray-800/50">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <FadeIn>
+            <h2 className="text-3xl font-bold text-white mb-4">Let&apos;s Work Together</h2>
+            <p className="text-gray-400 max-w-xl mx-auto mb-8">
+              Open to consulting engagements, partnerships, and conversations about enterprise AI.
             </p>
-          </div>
+            <a
+              href="mailto:musa@avirso.ai"
+              className="inline-block px-8 py-4 rounded-lg bg-purple-600 text-white font-medium hover:bg-purple-500 transition text-lg"
+            >
+              musa@avirso.ai
+            </a>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-8 text-left">Projects</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="bg-white shadow rounded-lg p-6 text-left">
-              <h3 className="text-2xl font-semibold mb-2">ViLanOCR</h3>
-              <p className="text-gray-700 mb-4">
-                A multilingual OCR system for handwritten text achieving a 1.2% CER on handwritten Urdu.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">Transformers</span>
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">ViT</span>
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">HuggingFace</span>
-              </div>
-              <div className="flex gap-4">
-                <a
-                  href="https://github.com/musadac/ViLanOCR"
-                  className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-sm"
-                >
-                  Github Code
-                </a>
-                <a
-                  href="https://huggingface.co/spaces/musadac/VilanOCR-Urdu-English-Chinese"
-                  className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-sm"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </div>
-            <div className="bg-white shadow rounded-lg p-6 text-left">
-              <h3 className="text-2xl font-semibold mb-2">BART/LLama 7B SFT Trainer</h3>
-              <p className="text-gray-700 mb-4">
-                A trainer implementation for LLMs on a single GPU using PEFT and Hugging Face’s SFT Trainer.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">LLM</span>
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">PEFT</span>
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">HuggingFace</span>
-              </div>
-              <div>
-                <a
-                  href="https://github.com/musadac/Training-LLMs"
-                  className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-sm"
-                >
-                  Github Code
-                </a>
-              </div>
-            </div>
-            <div className="bg-white shadow rounded-lg p-6 text-left">
-              <h3 className="text-2xl font-semibold mb-2">LLama2.C</h3>
-              <p className="text-gray-700 mb-4">
-                Chat UI and socket server for LLama2 inference in C, enabling real-time CPU-based processing.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">LLama</span>
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">C</span>
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-sm">WebSocket</span>
-              </div>
-              <div>
-                <a
-                  href="https://github.com/musadac/llama2.c"
-                  className="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-sm"
-                >
-                  Github Code
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-start mt-10">
-            <a
-              href="https://github.com/musadac"
-              className="px-6 py-3 border rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition text-lg"
-            >
-              Other Projects on Github &rarr;
+      {/* ── Footer ─────────────────────────────────────────────────────── */}
+      <footer className="py-8 border-t border-gray-800/50">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-gray-600">
+            &copy; {new Date().getFullYear()} Musa Dildar Ahmed.
+          </p>
+          <div className="flex gap-6">
+            <a href="https://www.linkedin.com/in/musadac/" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 hover:text-purple-400 transition">
+              LinkedIn
+            </a>
+            <a href="https://github.com/musadac" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 hover:text-purple-400 transition">
+              GitHub
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-white py-6 shadow-inner">
-        <div className="container mx-auto px-6 text-left text-gray-600">
-          &copy; {new Date().getFullYear()} Musa Dildar Ahmed Cheema. All rights reserved.
         </div>
       </footer>
     </main>

@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'MusaDAC',
-  description: 'Data Scientist and Researcher',
+  title: 'Musa Dildar Ahmed - AI Leadership & Tech Management',
+  description: 'Building production AI systems for Fortune 100 enterprises. Published researcher in NLP & Computer Vision.',
 }
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={inter.className}>{children}</body>
     </html>
   )
